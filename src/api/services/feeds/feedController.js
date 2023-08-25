@@ -1,3 +1,6 @@
+const { role } = require('../../../config/vars');
+const { Users } = require('../users/userModel');
+const { Feeds } = require('./feedModel');
 const service = require('./feedService');
 
 exports.getFeed = async (req, res, next) => {
@@ -39,6 +42,15 @@ exports.updateFeed = async (req, res, next) => {
 exports.deleteFeed = async (req, res, next) => {
   try {
     const  {status,response} = await service.deleteFeed(req);
+    res.status(status).json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.userFeedPermission = async (req, res, next) => {
+  try {
+    const {status,response} = await service.userFeedPermission(req);
     res.status(status).json(response);
   } catch (error) {
     next(error);

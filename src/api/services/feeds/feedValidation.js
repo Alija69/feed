@@ -8,4 +8,10 @@ module.exports = {
       url: Joi.string().required(),
     }),
   },
+  userFeedPermission: {
+    body: Joi.object({
+      feed_id: Joi.number().required(),
+      user_id:Joi.number().required()
+    }),
+  },
 };

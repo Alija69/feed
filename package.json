@@ -17,6 +17,9 @@
     "http-status": "^1.6.2",
     "jsonwebtoken": "^9.0.1",
     "mysql2": "^3.6.0",
+    "passport": "^0.6.0",
+    "passport-http-bearer": "^1.0.1",
+    "passport-jwt": "^4.0.1",
     "pg": "^8.11.3",
     "sequelize": "^6.32.1",
     "sequelize-cli": "^6.6.1"

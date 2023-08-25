@@ -1,20 +1,24 @@
 const express = require("express");
 const controller = require("./feedController");
 const { validate } = require("express-validation");
-const { createFeed } = require("./feedValidation");
-// const { authorize } = require('../../middleware/auth');
+const { createFeed,userFeedPermission } = require("./feedValidation");
+const { authorize } = require("../../middleware/auth");
 
 const router = express.Router();
 
 router
   .route("/")
-  .get(controller.getFeed)
-  .post(validate(createFeed), controller.createFeed);
+  .get(authorize(), controller.getFeed)
+  .post(authorize(), validate(createFeed), controller.createFeed);
 
 router
   .route("/:id")
-  .get(controller.getFeedById)
-  .put(controller.updateFeed)
-  .delete(controller.deleteFeed);
+  .get(authorize(), controller.getFeedById)
+  .put(authorize(), validate(createFeed), controller.updateFeed)
+  .delete(authorize(), controller.deleteFeed);
+
+router
+  .route("/give_access")
+  .post(authorize(), validate(userFeedPermission), controller.userFeedPermission);
 
 module.exports = router;
