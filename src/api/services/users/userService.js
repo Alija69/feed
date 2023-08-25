@@ -109,8 +109,6 @@ exports.deleteUser = async (req) => {
     let flag = false;
     let status = httpStatus.UNAUTHORIZED;
     let response = { status: false, msg: "You don't have permission." };
-    console.log((user && req.user.role == role.superAdmin))
-    console.log(user && user.role == role.basic && req.user.role == role.admin )
     if (user && user.role!==role.superAdmin && req.user.role == role.superAdmin ) {
       flag = true;
     } else if (user && user.role == role.basic && req.user.role == role.admin ) {
